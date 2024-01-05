@@ -1,0 +1,43 @@
+{
+  "name": "playmo-ranking-react-example",
+  "version": "1.0.0",
+  "description": "Example of PlayMO React ranking app",
+  "main": "index.js",
+  "scripts": {
+    "init": "sh scripts/init.sh",
+    "set-up": "sh scripts/set-up.sh",
+    "dev": "concurrently \"npm:dev-web\" \"npm:dev-api\"",
+    "dev-web": "vite",
+    "dev-api": "sls offline --reloadHandler",
+    "build": "vite build",
+    "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
+    "preview": "vite preview",
+    "run-api-local": "sls invoke local -f api",
+    "run-api-prod": "sls invoke -f api",
+    "deploy-api": "sls deploy",
+    "deploy-web": "npm run build && sls syncToS3 && sls invalidateCloudFrontCache",
+    "release": "concurrently \"npm:deploy-api\" \"npm:deploy-web\"",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0"
+  },
+  "devDependencies": {
+    "@types/react": "^18.2.43",
+    "@types/react-dom": "^18.2.17",
+    "@typescript-eslint/eslint-plugin": "^6.14.0",
+    "@typescript-eslint/parser": "^6.14.0",
+    "@vitejs/plugin-react": "^4.2.1",
+    "concurrently": "^8.2.2",
+    "eslint": "^8.55.0",
+    "eslint-plugin-react-hooks": "^4.6.0",
+    "eslint-plugin-react-refresh": "^0.4.5",
+    "serverless-offline": "^13.3.2",
+    "serverless-single-page-app-plugin": "file:./serverless-single-page-app-plugin",
+    "typescript": "^5.2.2",
+    "vite": "^5.0.8"
+  }
+}
